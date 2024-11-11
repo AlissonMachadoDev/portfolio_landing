@@ -43,7 +43,7 @@ defmodule PortfolioLandingWeb do
         layouts: [html: PortfolioLandingWeb.Layouts]
 
       import Plug.Conn
-      import PortfolioLandingWeb.Gettext
+      use Gettext, backend: PortfolioLandingWeb.Gettext
 
       unquote(verified_routes())
     end
@@ -85,7 +85,7 @@ defmodule PortfolioLandingWeb do
       import Phoenix.HTML
       # Core UI components and translation
       import PortfolioLandingWeb.CoreComponents
-      import PortfolioLandingWeb.Gettext
+      use Gettext, backend: PortfolioLandingWeb.Gettext
 
       # Shortcut for generating JS commands
       alias Phoenix.LiveView.JS

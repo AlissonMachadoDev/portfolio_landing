@@ -17,7 +17,7 @@ defmodule PortfolioLandingWeb.CoreComponents do
   use Phoenix.Component
 
   alias Phoenix.LiveView.JS
-  import PortfolioLandingWeb.Gettext
+  use Gettext, backend: PortfolioLandingWeb.Gettext
 
   @doc """
   Renders a modal.

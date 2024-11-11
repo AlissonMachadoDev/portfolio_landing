@@ -7,10 +7,6 @@
 # General application configuration
 import Config
 
-config :portfolio_landing,
-  ecto_repos: [PortfolioLanding.Repo],
-  generators: [timestamp_type: :utc_datetime]
-
 # Configures the endpoint
 config :portfolio_landing, PortfolioLandingWeb.Endpoint,
   url: [host: "localhost"],

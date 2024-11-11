@@ -9,7 +9,6 @@ defmodule PortfolioLanding.Application do
   def start(_type, _args) do
     children = [
       PortfolioLandingWeb.Telemetry,
-      PortfolioLanding.Repo,
       {DNSCluster, query: Application.get_env(:portfolio_landing, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: PortfolioLanding.PubSub},
       # Start the Finch HTTP client for sending emails
