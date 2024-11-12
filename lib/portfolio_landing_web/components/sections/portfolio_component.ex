@@ -18,7 +18,7 @@ defmodule PortfolioLandingWeb.Components.Sections.PortfolioComponent do
         description: "Elixir Phoenix Application, API for a card game.",
         site: "",
         code: "https:www.github.com/AlissonMachadoDev/digistab_store",
-        additional_class: "bg-white"
+        additional_class: "bg-white p-16"
       },
       %{
         title: "Animal Showdown Backend",
@@ -26,7 +26,7 @@ defmodule PortfolioLandingWeb.Components.Sections.PortfolioComponent do
         description: "NextJS Application for a card game.",
         site: "",
         code: "https:www.github.com/AlissonMachadoDev/digistab_store",
-        additional_class: "bg-white"
+        additional_class: "bg-white p-16"
       }
     ]
 
