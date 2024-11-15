@@ -6,7 +6,9 @@ import Config
 # which you should run after static files are built and
 # before starting your production server.
 config :portfolio_landing, PortfolioLandingWeb.Endpoint,
-  cache_static_manifest: "priv/static/cache_manifest.json"
+  cache_static_manifest: "priv/static/cache_manifest.json",
+  url: [host: "alissonmachado.dev", port: 443],
+  force_ssl: [rewrite_on: [:x_forwarded_proto]]
 
 # Configures Swoosh API Client
 config :swoosh, api_client: Swoosh.ApiClient.Finch, finch_name: PortfolioLanding.Finch
