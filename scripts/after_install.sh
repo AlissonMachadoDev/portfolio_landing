@@ -2,11 +2,14 @@
 set -e
 export HOME="/home/ubuntu"
 export MIX_ENV=prod
-export PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/local/ubuntu:/usr/ubuntu:/snap/bin:/.asdf"
+export PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/local/ubuntu:/usr/ubuntu:/snap/bin"
+
+apt-get -y install nodejs
+apt-get -y install erlang-dev erlang-parsetools erlang-inets erlang-dev elixir
+apt-get -y install nginx inotify-tools fish screen
 
 which elixir
 elixir --version
-
 which node
 node --version
 
