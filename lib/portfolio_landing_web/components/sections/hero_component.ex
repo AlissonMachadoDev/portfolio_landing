@@ -17,12 +17,22 @@ defmodule PortfolioLandingWeb.Components.Sections.HeroComponent do
             </h1>
             <p class="text-gray-400 text-lg">Hey, you! Follow my  lead!</p>
             <div class="flex gap-4">
-              <button class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg transition duration-300">
+              <.link
+                navigate="https://github.com/ali1ariel"
+                class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg transition duration-300"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 My GitHub
-              </button>
-              <button class="border border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white px-6 py-3 rounded-lg transition duration-300">
+              </.link>
+              <.link
+                navigate="https://www.linkedin.com/in/alisson-machado/"
+                class="border border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white px-6 py-3 rounded-lg transition duration-300"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 My LinkedIn
-              </button>
+              </.link>
             </div>
           </div>
           <div class="md:w-1/2 mt-8 md:mt-0">

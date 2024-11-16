@@ -50,23 +50,23 @@ defmodule PortfolioLandingWeb.Components.Sections.PortfolioComponent do
                   <h3 class="text-xl font-semibold mb-2"><%= item.title %></h3>
                   <p class="text-gray-300"><%= item.description %></p>
                   <div class="flex flex-row mt-4 gap-4 justify-around">
-                    <a
-                      href={item.code}
+                    <.link
+                      navigate={item.code}
+                      class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg transition duration-300"
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg transition duration-300"
                     >
                       Code
-                    </a>
-                    <a
+                    </.link>
+                    <.link
                       :if={item.site != ""}
-                      href={item.site}
+                      navigate={item.code}
+                      class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg transition duration-300"
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg transition duration-300"
                     >
                       Site
-                    </a>
+                    </.link>
                   </div>
                 </div>
               </div>
