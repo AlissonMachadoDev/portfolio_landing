@@ -1,7 +1,6 @@
 #!/bin/bash
 set -e
 
-# Print script start
 echo "Starting after_install script..."
 
 # Export environment variables
@@ -9,17 +8,44 @@ export HOME="/home/ubuntu"
 export MIX_ENV=prod
 export PATH="$HOME/.asdf/bin:$HOME/.asdf/shims:$PATH"
 
-echo "Installing Node.js if not present..."
-if ! command -v node &> /dev/null; then
-    echo "Node.js not found. Installing Node.js 18.x..."
-    # Add NodeSource repository
-    curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-    # Install Node.js
+# Function to install Node.js
+install_nodejs() {
+    echo "Installing Node.js..."
+    # Remove any existing nodejs installations
+    sudo apt-get remove -y nodejs npm &>/dev/null || true
+    sudo apt-get purge -y nodejs npm &>/dev/null || true
+    
+    # Install prerequisites
+    sudo apt-get update
+    sudo apt-get install -y ca-certificates curl gnupg
+    
+    # Add Node.js official repository
+    sudo mkdir -p /etc/apt/keyrings
+    curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+    echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_18.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
+    
+    # Update and install Node.js
+    sudo apt-get update
     sudo apt-get install -y nodejs
-    echo "Node.js installed successfully"
+    
+    # Verify installation
+    node --version
+    npm --version
+    
+    echo "Node.js installation completed"
+}
+
+# Install Node.js if not present or if npm is not available
+if ! command -v node &> /dev/null || ! command -v npm &> /dev/null; then
+    install_nodejs
 fi
 
-# Verify Node.js installation
+# Double check Node.js and npm are available
+if ! command -v node &> /dev/null || ! command -v npm &> /dev/null; then
+    echo "ERROR: Node.js or npm installation failed"
+    exit 1
+fi
+
 echo "Node.js version: $(node --version)"
 echo "npm version: $(npm --version)"
 
@@ -35,9 +61,6 @@ fi
 echo "Current working directory: $(pwd)"
 echo "HOME directory: $HOME"
 echo "PATH: $PATH"
-
-# Verify installations
-echo "Verifying installations..."
 
 # Check Erlang
 if command -v erl >/dev/null 2>&1; then
@@ -70,7 +93,14 @@ mix deps.get --only prod
 
 # Install node dependencies for assets
 echo "Installing node dependencies..."
-cd assets && npm install --legacy-peer-deps
+cd assets
+echo "In assets directory: $(pwd)"
+# Check if package.json exists
+if [ ! -f "package.json" ]; then
+    echo "Error: package.json not found in $(pwd)"
+    exit 1
+fi
+npm install --legacy-peer-deps
 cd ..
 
 # Compile and deploy assets
