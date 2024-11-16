@@ -8,8 +8,8 @@ defmodule PortfolioLandingWeb.Components.Sections.PortfolioComponent do
         title: "Digistab Store",
         image: ~p"/images/logo_digistab_store.svg",
         description: "A store application made with LiveView.",
-        site: "https://www.google.com/",
-        code: "https:www.github.com/AlissonMachadoDev/digistab-store",
+        site: "digistab-store",
+        code: "https://www.github.com/AlissonMachadoDev/digistab-store",
         additional_class: "bg-white p-16"
       },
       %{
@@ -17,7 +17,7 @@ defmodule PortfolioLandingWeb.Components.Sections.PortfolioComponent do
         image: ~p"/images/coming-soon-text.svg",
         description: "Elixir Phoenix Application, API for a card game.",
         site: "",
-        code: "https:www.github.com/AlissonMachadoDev/digistab_store",
+        code: "https://www.github.com/AlissonMachadoDev/digistab_store",
         additional_class: "bg-white p-16"
       },
       %{
@@ -25,7 +25,7 @@ defmodule PortfolioLandingWeb.Components.Sections.PortfolioComponent do
         image: ~p"/images/coming-soon-text.svg",
         description: "NextJS Application for a card game.",
         site: "",
-        code: "https:www.github.com/AlissonMachadoDev/digistab_store",
+        code: "https://www.github.com/AlissonMachadoDev/digistab_store",
         additional_class: "bg-white p-16"
       }
     ]
