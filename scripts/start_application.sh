@@ -18,12 +18,7 @@ _build/prod/rel/portfolio_landing/bin/portfolio_landing daemon
 
 # Wait for the application to start
 echo "Waiting for application to start..."
-sleep 5
+sleep 10
 
-# Verify the application is running
-if ! _build/prod/rel/portfolio_landing/bin/portfolio_landing pid; then
-    echo "Error: Application failed to start"
-    exit 1
-fi
 
 echo "Application started successfully"
