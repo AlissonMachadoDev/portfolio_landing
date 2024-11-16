@@ -1,24 +1,56 @@
-  name: Deployment
-  
-  on:
-    push:
-      branches: 
-        - main 
+name: 'Deploy to AWS'
 
-  jobs:
-    deploy:
-      runs-on: ubuntu-latest
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
 
-      steps:
-      - uses: actions/checkout@v2
+permissions:
+  contents: read
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
+jobs:
+  deploy:
+    name: 'Deploy to EC2'
+    runs-on: ubuntu-latest
+    
+    environment: production
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1 # Altere para sua região
-
+          aws-region: ${{ secrets.AWS_REGION }}
+          
+      - name: Create or Update CodeDeploy Application
+        run: |
+          aws deploy create-application \
+            --application-name portfolio-landing || true
+            
+      - name: Create or Update Deployment Group
+        run: |
+          aws deploy create-deployment-group \
+            --application-name portfolio-landing \
+            --deployment-group-name portfolio-landing-production \
+            --service-role-arn ${{ secrets.AWS_CODEDEPLOY_SERVICE_ROLE }} \
+            --deployment-style deploymentType=IN_PLACE,deploymentOption=WITHOUT_TRAFFIC_CONTROL \
+            --ec2-tag-filters Key=Environment,Type=KEY_AND_VALUE,Value=Production || true
+                  
+      - name: Create Deployment Package
+        run: |
+          mkdir -p deployment-package
+          cp -r _build/prod/rel/portfolio_landing deployment-package/
+          cp appspec.yml deployment-package/
+          cp -r scripts deployment-package/
+          cd deployment-package
+          zip -r ../deployment-package.zip .
+          
       - name: Create CodeDeploy Deployment
         run: |
           aws deploy create-deployment \
