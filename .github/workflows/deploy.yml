@@ -32,8 +32,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: '**/package-lock.json'
           
       - name: Install Dependencies
         run: |
@@ -43,8 +41,7 @@ jobs:
           
       - name: Setup and Build Assets
         run: |
-          cd assets && npm install && cd ..
-          mix assets.deploy
+          npm install --prefix assets
           
       - name: Create Production Release
         env:
