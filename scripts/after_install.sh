@@ -108,4 +108,14 @@ echo "Compiling and deploying assets..."
 mix compile
 mix assets.deploy
 
+# Create production release
+echo "Creating production release..."
+mix release --overwrite
+
+# Ensure the release was created
+if [ ! -f "_build/prod/rel/portfolio_landing/bin/portfolio_landing" ]; then
+    echo "Error: Release creation failed - binary not found"
+    exit 1
+fi
+
 echo "After install script completed successfully"
