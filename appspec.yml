@@ -1,21 +1,19 @@
 version: 0.0
 os: linux
+
 files:
   - source: /portfolio_landing
     destination: /opt/portfolio_landing
   - source: /scripts
     destination: /opt/portfolio_landing/scripts
+
 permissions:
   - object: /opt/portfolio_landing
     pattern: "**"
     owner: ubuntu
     group: ubuntu
     mode: 755
-  - object: /opt/portfolio_landing/scripts
-    pattern: "**"
-    owner: ubuntu
-    group: ubuntu
-    mode: 755
+
 hooks:
   BeforeInstall:
     - location: scripts/before_install.sh
