@@ -18,9 +18,41 @@ jobs:
     environment: production
     
     steps:
+      
       - name: Checkout Repository
         uses: actions/checkout@v4
       
+      - name: Set up Elixir
+        uses: erlef/setup-beam@v1
+        with:
+          elixir-version: '1.17.0'
+          otp-version: '25.0'
+          
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+      - name: Install Dependencies
+        run: |
+          mix local.hex --force
+          mix local.rebar --force
+          mix deps.get
+          
+      - name: Setup and Build Assets
+        run: |
+          cd assets && npm install && cd ..
+          mix assets.deploy
+          
+      - name: Create Production Release
+        env:
+          MIX_ENV: prod
+          SECRET_KEY_BASE: ${{ secrets.SECRET_KEY_BASE }}
+        run: |
+          mix compile
+          mix phx.digest
+          mix release --overwrite
+          
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -50,7 +82,7 @@ jobs:
           cp -r scripts deployment-package/
           cd deployment-package
           zip -r ../deployment-package.zip .
-          
+
       - name: Create CodeDeploy Deployment
         run: |
           aws deploy create-deployment \
