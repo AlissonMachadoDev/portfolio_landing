@@ -15,14 +15,14 @@ export SECRET_KEY_BASE=$(aws ssm get-parameter --name "/portfolio_landing/prod/s
 export DATABASE_URL=$(aws ssm get-parameter --name "/portfolio_landing/prod/database_url" --with-decryption --query Parameter.Value --output text)
 
 # Start the application using the release
-portfolio_landing/bin/portfolio_landing daemon
+_build/prod/rel/portfolio_landing/bin/portfolio_landing daemon
 
 # Wait for the application to start
 echo "Waiting for application to start..."
 sleep 5
 
 # Verify the application is running
-if ! portfolio_landing/bin/portfolio_landing pid; then
+if ! _build/prod/rel/portfolio_landing/bin/portfolio_landing pid; then
     echo "Error: Application failed to start"
     exit 1
 fi
