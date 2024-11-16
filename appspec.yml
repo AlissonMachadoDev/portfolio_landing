@@ -4,6 +4,7 @@ os: linux
 files:
   - source: /
     destination: /opt/portfolio_landing
+    overwrite: true
 
 permissions:
   - object: /opt/portfolio_landing
