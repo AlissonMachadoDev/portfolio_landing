@@ -1,11 +1,7 @@
 #!/bin/bash
 set -e  # Exit on error
 
-# Check if we're running as root/sudo
-if [ "$EUID" -ne 0 ]; then 
-    echo "Please run as root/sudo"
-    exit 1
-fi
+echo "Starting cleanup process..."
 
 # Stop the application if it's running
 if [ -f /opt/portfolio_landing/portfolio_landing/bin/portfolio_landing ]; then
@@ -14,6 +10,7 @@ if [ -f /opt/portfolio_landing/portfolio_landing/bin/portfolio_landing ]; then
 fi
 
 # Make sure the directory exists
+echo "Ensuring directory exists..."
 mkdir -p /opt/portfolio_landing
 
 # Clean up thoroughly
