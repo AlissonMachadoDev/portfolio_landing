@@ -2,10 +2,8 @@ version: 0.0
 os: linux
 
 files:
-  - source: /portfolio_landing
+  - source: /
     destination: /opt/portfolio_landing
-  - source: /scripts
-    destination: /opt/portfolio_landing/scripts
 
 permissions:
   - object: /opt/portfolio_landing
