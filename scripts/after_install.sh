@@ -9,6 +9,20 @@ export HOME="/home/ubuntu"
 export MIX_ENV=prod
 export PATH="$HOME/.asdf/bin:$HOME/.asdf/shims:$PATH"
 
+echo "Installing Node.js if not present..."
+if ! command -v node &> /dev/null; then
+    echo "Node.js not found. Installing Node.js 18.x..."
+    # Add NodeSource repository
+    curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+    # Install Node.js
+    sudo apt-get install -y nodejs
+    echo "Node.js installed successfully"
+fi
+
+# Verify Node.js installation
+echo "Node.js version: $(node --version)"
+echo "npm version: $(npm --version)"
+
 # Source asdf if it exists
 if [ -f "$HOME/.asdf/asdf.sh" ]; then
     . "$HOME/.asdf/asdf.sh"
@@ -38,14 +52,6 @@ if command -v elixir >/dev/null 2>&1; then
     echo "Elixir version: $(elixir --version)"
 else
     echo "Error: Elixir not found"
-    exit 1
-fi
-
-# Check Node.js
-if command -v node >/dev/null 2>&1; then
-    echo "Node.js version: $(node --version)"
-else
-    echo "Error: Node.js not found"
     exit 1
 fi
 
