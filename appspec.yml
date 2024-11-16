@@ -15,13 +15,6 @@ permissions:
     type:
       - file
       - directory
-  - object: /opt/portfolio_landing/scripts
-    pattern: "*.sh"
-    owner: ubuntu
-    group: ubuntu
-    mode: 755
-    type:
-      - file
 
 hooks:
   BeforeInstall:
