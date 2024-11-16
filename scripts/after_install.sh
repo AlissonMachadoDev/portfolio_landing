@@ -1,8 +1,18 @@
 #!/bin/bash
-# Stopping existing application instance if running
-if [ -f /opt/portfolio_landing/portfolio_landing/bin/portfolio_landing ]; then
-    /opt/portfolio_landing/portfolio_landing/bin/portfolio_landing stop
-fi
+set -e
+export HOME="/home/ubuntu"
+export MIX_ENV=prod
 
-# Cleaning up old deployment
-rm -rf /opt/portfolio_landing/*
+cd /opt/portfolio_landing
+
+# Instalar dependências do Elixir
+mix local.hex --force
+mix local.rebar --force
+mix deps.get --only prod
+
+# Instalar dependências do Node.js
+cd assets && npm install --legacy-peer-deps && cd ..
+
+# Compilar
+mix compile
+mix assets.deploy

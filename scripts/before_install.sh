@@ -5,4 +5,8 @@ if [ -f /opt/portfolio_landing/portfolio_landing/bin/portfolio_landing ]; then
 fi
 
 # Cleaning up old deployment
-rm -rf /opt/portfolio_landing/*
+sudo rm -rf /opt/portfolio_landing/*
+
+# Ajustar permissões do diretório
+sudo chown -R ubuntu:ubuntu /opt/portfolio_landing
+sudo chmod -R 755 /opt/portfolio_landing
