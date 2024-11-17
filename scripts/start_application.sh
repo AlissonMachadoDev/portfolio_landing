@@ -18,7 +18,6 @@ _build/prod/rel/portfolio_landing/bin/portfolio_landing daemon
 
 # Wait for the application to start
 echo "Waiting for application to start..."
-sleep 10
 
 
 echo "Application started successfully"

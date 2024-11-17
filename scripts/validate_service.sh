@@ -1,5 +1,9 @@
 #!/bin/bash
 # Is this running?
+systemctl restart portfolio.service
+
+sleep 10
+
 systemctl is-active portfolio_landing.service
 
 # Is this answering?
