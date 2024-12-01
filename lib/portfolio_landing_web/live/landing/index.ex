@@ -2,6 +2,8 @@ defmodule PortfolioLandingWeb.Landing.Index do
   use PortfolioLandingWeb, :live_view
 
   import PortfolioLandingWeb.Components.Sections.{
+    AboutComponent,
+    ExperienceComponent,
     HeaderComponent,
     HeroComponent,
     ServicesComponent,
@@ -16,6 +18,8 @@ defmodule PortfolioLandingWeb.Landing.Index do
       <.header_component mobile_menu_open={@mobile_menu_open} />
       <.hero />
       <.services />
+      <.about />
+      <.experience />
       <.portfolio />
       <.footer />
     </div>

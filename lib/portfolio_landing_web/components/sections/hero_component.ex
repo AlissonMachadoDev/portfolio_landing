@@ -16,6 +16,12 @@ defmodule PortfolioLandingWeb.Components.Sections.HeroComponent do
               <span x-text="text">Hi, I am Alisson Machado</span>
             </h1>
             <p class="text-gray-400 text-lg">Hey, you! Follow my  lead!</p>
+            <div class="mr-4">
+              <p class="text-gray-400 text-lg ">
+                My name is Alisson Machado, I'm Brazilian, 27 years old. I have worked with Elixir since 2019, seeing many technologies, this profile was made as a simple LiveView page, but I think it's enough to start to show my passion for this technology, below there's my GitHub with some more text about me and my codes, of course, and my LinkedIn profile, feel free to follow me.
+              </p>
+            </div>
+
             <div class="flex gap-4">
               <.link
                 navigate="https://github.com/ali1ariel"

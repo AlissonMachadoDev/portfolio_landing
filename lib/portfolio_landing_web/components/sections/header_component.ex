@@ -20,7 +20,16 @@ defmodule PortfolioLandingWeb.Components.Sections.HeaderComponent do
           <!-- Desktop menu -->
           <div class="hidden md:flex space-x-8">
             <a href="#services" class="hover:text-purple-600 transition">Services</a>
+            <a href="#about" class="hover:text-purple-600 transition">About me</a>
+            <a href="#experience" class="hover:text-purple-600 transition">Past Experiences</a>
             <a href="#portfolio" class="hover:text-purple-600 transition">Portfolio</a>
+            <a
+              href="https://digistab-store.alissonmachado.dev/"
+              target="_blank"
+              class="hover:text-purple-600 transition"
+            >
+              Digistab Store
+            </a>
           </div>
         </div>
         <!-- Mobile menu -->
